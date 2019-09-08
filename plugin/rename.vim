@@ -10,14 +10,14 @@
 "
 " :rename[!] {newname}
 
-command! -nargs=* -complete=customlist,SiblingFiles -bang Rename :call Rename("<args>", "<bang>")
-cabbrev rename <c-r>=getcmdpos() == 1 && getcmdtype() == ":" ? "Rename" : "rename"<CR>
+command! -nargs=* -complete=customlist,SiblingFiles -bang RenameFile :call RenameFile("<args>", "<bang>")
+cabbrev rename <c-r>=getcmdpos() == 1 && getcmdtype() == ":" ? "RenameFile" : "rename"<CR>
 
 function! SiblingFiles(A, L, P)
 	return map(split(globpath(expand("%:h") . "/", a:A . "*"), "\n"), 'fnamemodify(v:val, ":t")')
 endfunction
 
-function! Rename(name, bang)
+function! RenameFile(name, bang)
 	let l:curfile = expand("%:p")
 	let l:curpath = expand("%:h") . "/"
 	let v:errmsg = ""
